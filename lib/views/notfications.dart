@@ -1,4 +1,4 @@
-import 'package:cosmetics_app/views/loginScreen.dart';
+import 'package:cosmetics_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 
 class Notfications extends StatelessWidget {

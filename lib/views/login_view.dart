@@ -1,4 +1,4 @@
-import 'package:cosmetics_app/views/forgotPassword.dart';
+import 'package:cosmetics_app/views/forgot_password.dart';
 import 'package:cosmetics_app/views/home.dart';
 import 'package:cosmetics_app/views/regiter.dart';
 import 'package:flutter/material.dart';
@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Forgotpassword()),
+                        MaterialPageRoute(builder: (context) => const ForgotPassword()),
                       );
                     },
                     child: const Text(

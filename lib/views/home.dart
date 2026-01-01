@@ -227,8 +227,9 @@ class CartPage extends StatelessWidget {
           const SizedBox(height: 20),
         Row(
   children: [
-    const SizedBox(width: 16),
 
+    const SizedBox(width: 16),
+    
     const Expanded(
       child: Center(
         child: Text(
@@ -264,7 +265,6 @@ class CartPage extends StatelessWidget {
           },
         )
 
- 
         ],
       )
     );

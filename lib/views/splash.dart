@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:cosmetics_app/views/girl.dart';
+import 'package:cosmetics_app/views/onboarding_view.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 4), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const GirlView()),
+        MaterialPageRoute(builder: (context) => const OnBoarding()),
       );
     });
   }

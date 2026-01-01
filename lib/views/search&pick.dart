@@ -39,7 +39,6 @@ class SearchAndPickView extends StatelessWidget {
 
               const SizedBox(height: 40),
 
-              
               const Text(
                 "Search & Pick",
                 style: TextStyle(

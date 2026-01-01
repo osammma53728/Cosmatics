@@ -1,4 +1,4 @@
-import 'package:cosmetics_app/views/creatPassword.dart';
+import 'package:cosmetics_app/views/creat_password.dart';
 import 'package:flutter/material.dart';
 
 class Verifycodefornewpassword extends StatelessWidget {

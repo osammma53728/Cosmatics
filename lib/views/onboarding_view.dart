@@ -1,8 +1,48 @@
+import 'package:cosmetics_app/views/notfications.dart';
 import 'package:cosmetics_app/views/search&pick.dart';
 import 'package:flutter/material.dart';
 
-class GirlView extends StatelessWidget {
-  const GirlView({super.key});
+class OnBoarding extends StatefulWidget {
+  const OnBoarding({super.key});
+
+  @override
+  State<OnBoarding> createState() => _OnBoardingState();
+}
+
+class _OnBoardingState extends State<OnBoarding> {
+  int currentIndex = 0;
+
+  final List<String> images = [
+    'assets/images/girl.png',
+    'assets/images/paint.png'
+    
+  ];
+
+  final List<String> titles = [
+    'WELCOME!',
+    'DISCOVER BEAUTY'
+    ,
+  ];
+
+  final List<String> descriptions = [
+    'Makeup has the power to transform your mood and empowers you to be a more confident person.',
+    'Find the best cosmetics that match your unique style and personality.',
+  ];
+
+  void onNextPressed() {
+    if (currentIndex < images.length - 1) {
+      setState(() {
+        currentIndex++;
+      });
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Notfications(),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +53,12 @@ class GirlView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-
-            
               Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                  
+                  },
                   child: const Text(
                     "Skip",
                     style: TextStyle(color: Colors.deepPurple),
@@ -31,7 +71,7 @@ class GirlView extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(60),
                 child: Image.asset(
-                  'assets/images/girl.png',
+                  images[currentIndex],
                   width: 260,
                   height: 260,
                   fit: BoxFit.cover,
@@ -40,28 +80,28 @@ class GirlView extends StatelessWidget {
 
               const SizedBox(height: 40),
 
-              const Text(
-                "WELCOME!",
-                style: TextStyle(
+              Text(
+                titles[currentIndex],
+                style: const TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.2,
-                  color: Colors.deepPurple
+                  color: Colors.deepPurple,
                 ),
               ),
 
               const SizedBox(height: 12),
 
-              const Text(
-                "Makeup has the power to transform your mood and empowers you to be a more confident person.",
+              Text(
+                descriptions[currentIndex],
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.deepPurple,
                 ),
               ),
 
-              const SizedBox(height:33),
+              const SizedBox(height: 33),
 
               Container(
                 width: 55,
@@ -71,12 +111,7 @@ class GirlView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const SearchAndPickView()),
-                    );
-                  },
+                  onPressed: onNextPressed,
                   icon: const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.white,

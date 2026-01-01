@@ -1,4 +1,4 @@
-import 'package:cosmetics_app/views/verifyCode.dart';
+import 'package:cosmetics_app/views/verify_code.dart';
 import 'package:flutter/material.dart';
 
 class RegiterScreen extends StatelessWidget {

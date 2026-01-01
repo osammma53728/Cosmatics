@@ -1,9 +1,9 @@
 import 'package:cosmetics_app/views/regiter.dart';
-import 'package:cosmetics_app/views/verifyCodeForNewPassword.dart';
+import 'package:cosmetics_app/views/verify_code_for_new_password.dart';
 import 'package:flutter/material.dart';
 
-class Forgotpassword extends StatelessWidget {
-  const Forgotpassword({super.key});
+class ForgotPassword extends StatelessWidget {
+  const ForgotPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
