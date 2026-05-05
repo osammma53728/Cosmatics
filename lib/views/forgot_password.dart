@@ -1,6 +1,7 @@
 import 'package:cosmetics_app/views/regiter.dart';
-import 'package:cosmetics_app/views/verify_code_for_new_password.dart';
+import 'package:cosmetics_app/views/verify_code.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({super.key});
@@ -17,6 +18,7 @@ class ForgotPassword extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child:InkWell(
+
   onTap: () {
     Navigator.pop(context);
   },
@@ -30,8 +32,8 @@ class ForgotPassword extends StatelessWidget {
             ),
               const SizedBox(height: 39),
               Container(
-                height: 77,
-                width: 77,
+                height: 77.h,
+                width: 77.w,
                 child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
               ),
               const SizedBox(height: 33),
@@ -108,14 +110,14 @@ class ForgotPassword extends StatelessWidget {
               ),
               const SizedBox(height: 55),
                 SizedBox(
-                width: 255,
-                height: 66,
+                width: 255.w,
+                height: 66.h,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Verifycodefornewpassword(),
+                        builder: (context) => const Verifycode(phone:  ""),
                       ),
                     );
                   },
@@ -140,3 +142,4 @@ class ForgotPassword extends StatelessWidget {
     );
   }
 }
+

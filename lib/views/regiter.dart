@@ -1,8 +1,14 @@
+import 'package:cosmetics_app/data/auth.dart';
 import 'package:cosmetics_app/views/verify_code.dart';
 import 'package:flutter/material.dart';
 
 class RegiterScreen extends StatelessWidget {
-  const RegiterScreen({super.key});
+   RegiterScreen({super.key});
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +30,7 @@ class RegiterScreen extends StatelessWidget {
               ),
               const SizedBox(height: 18),
               TextField(
+                controller: _nameController, 
                 decoration: InputDecoration(
                   labelText: 'Your Name',
 
@@ -67,8 +74,11 @@ class RegiterScreen extends StatelessWidget {
               ),
               const SizedBox(height: 14),
               TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
-                  labelText: 'Your Name',
+                  
+                  labelText: 'email',
+                  
 
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   hintText: '',
@@ -178,10 +188,55 @@ class RegiterScreen extends StatelessWidget {
                 width: 255,
                 height: 66,
                 child: ElevatedButton(
-                  onPressed: () {
-                      Navigator.push(
+                  onPressed: () async {
+                    try {
+                  var w= await AuthService.register(
+                      _nameController.text,
+                      _emailController.text,
+                      _phoneController.text,
+                      _passwordController.text
+                    );
+                    showDialog(
+  context: context,
+  builder: (context) {
+    return AlertDialog(
+      title: Text("Title"),
+      content: Text(w.toString()),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context); // يقفل الدايلوج
+          },
+          child: Text("OK"),
+        ),
+      ],
+    );
+  },
+);
+                    } catch (e) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text("Error"),
+                            content: Text(e.toString()),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context); // يقفل الدايلوج
+                                },
+                                child: const Text("OK"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Verifycode()),
+                      MaterialPageRoute(
+                        builder: (context) => const Verifycode( phone: "1234567890",),
+                      ),
                     );
                   },
                   style: ElevatedButton.styleFrom(

@@ -79,7 +79,7 @@ class _OnBoardingState extends State<OnBoarding> {
               ),
 
               const SizedBox(height: 40),
-
+  
               Text(
                 titles[currentIndex],
                 style: const TextStyle(

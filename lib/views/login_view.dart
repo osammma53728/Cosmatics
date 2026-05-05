@@ -1,3 +1,4 @@
+import 'package:cosmetics_app/data/auth.dart';
 import 'package:cosmetics_app/views/forgot_password.dart';
 import 'package:cosmetics_app/views/home.dart';
 import 'package:cosmetics_app/views/regiter.dart';
@@ -13,10 +14,53 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool obscureText = true;
+  bool isLoading = false;
 
-  String countryCode = '+20';
+  String? countryCode;
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  Future<void> login() async {
+    print("Login started");
+
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      final response = await AuthService.login(
+        phoneController.text.trim(),
+        passwordController.text.trim(),
+        countryCode!,
+      );
+
+      print("Response: $response");
+
+      if (response != null) {
+        print("Login success");
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      }
+    } catch (e) {
+      print("Error: $e");
+
+      ScaffoldMessenger.of(
+        context,
+
+      ).showSnackBar(SnackBar(content: Text("Error: $e")));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,24 +75,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 40),
 
                 Container(
-  height: 200,
-  width: 200,
-  color: Colors.white,
-  child: Image.asset(
-    'assets/images/login.png',
-    fit: BoxFit.cover,
-  ),
-),
-
+                  height: 200,
+                  width: 200,
+                  color: Colors.white,
+                  child: Image.asset(
+                    'assets/images/login.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
 
                 const SizedBox(height: 30),
 
                 const Text(
                   'Login Now',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                 ),
 
                 const SizedBox(height: 8),
@@ -124,9 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       border: InputBorder.none,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          obscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                          obscureText ? Icons.visibility_off : Icons.visibility,
                         ),
                         onPressed: () {
                           setState(() {
@@ -146,7 +184,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ForgotPassword()),
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPassword(),
+                        ),
                       );
                     },
                     child: const Text(
@@ -168,15 +208,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,MaterialPageRoute(builder:  (context) => const HomeScreen()),
-                      );
-                    },
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    onPressed: isLoading ? null : login,
+                    child: isLoading
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text('Login', style: TextStyle(fontSize: 18)),
                   ),
                 ),
 
@@ -188,10 +223,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text("Don't have an account? "),
                     GestureDetector(
                       onTap: () {
-                          Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const RegiterScreen()),
-                    );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RegiterScreen(),
+                          ),
+                        );
                       },
                       child: const Text(
                         'Register',

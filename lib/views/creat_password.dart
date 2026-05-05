@@ -1,6 +1,7 @@
 import 'package:cosmetics_app/views/login_view.dart';
 import 'package:cosmetics_app/views/regiter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Creatpassword extends StatelessWidget {
   const Creatpassword({super.key});
@@ -14,8 +15,8 @@ class Creatpassword extends StatelessWidget {
             children: [
               const SizedBox(height: 39),
               Container(
-                height: 77,
-                width: 77,
+                height: 77.h,
+                width: 77.w,
                 child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
               ),
               const SizedBox(height: 33),
@@ -35,8 +36,8 @@ class Creatpassword extends StatelessWidget {
                PasswordField(labelText: 'Confirm Password', hintText: 'Confirm Password',),
               const SizedBox(height: 55),
               SizedBox(
-                width: 255,
-                height: 66,
+                width: 255.w,
+                height: 66.h,
                 child: ElevatedButton(
                   onPressed: () {
                        showDialog(

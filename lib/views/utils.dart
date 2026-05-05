@@ -218,25 +218,57 @@ class CartItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(color: Colors.grey),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  Icon(Icons.remove, size: 20),
-                  Text(
-                    '1',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Icon(Icons.add, size: 20),
-                ],
-              ),
+              child: ItemCount(),
             ),
           ),
         ],
       ),
     );
+  }
+}
+class ItemCount extends StatefulWidget {
+  const ItemCount({super.key});
+
+  @override
+  State<ItemCount> createState() => _ItemCountState();
+}
+
+class _ItemCountState extends State<ItemCount> {
+  int count = 1;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    GestureDetector(
+      onTap: () {
+        if (count > 1) {
+          setState(() {
+            count--;
+          });
+        }
+      },
+      child: const Icon(Icons.remove, size: 18),
+    ),
+
+    Text(
+      '$count',
+      style: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+
+    GestureDetector(
+      onTap: () {
+        setState(() {
+          count++;
+        });
+      },
+      child: const Icon(Icons.add, size: 18),
+    ),
+  ],
+);
   }
 }
 
