@@ -2,15 +2,15 @@ import 'api.dart';
 
 class AuthService {
 
-  static Future login(String phone, String password , String email) async {
+  static Future login(String phone, String password , String countryCode ) async {
 
     final response = await ApiService.dio.post(
       "/api/Auth/login",
       data: {
-        "countryCode": "+20",
+        "countryCode": countryCode,
         "phoneNumber": phone,
-        "password": password,
-        "email": email
+        "password": password
+        
       },
     );
 
